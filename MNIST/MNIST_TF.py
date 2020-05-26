@@ -13,8 +13,7 @@ from plotting import display_sample_digits_validation
 # avoid CPU warning ("Your CPU supports instructions that this TensorFlow binary was not compiled to use: AVX2 FMA")
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
 
-SAVE_PATH = os.path.expanduser('~/projects/DL/Experiments/')
-#SAVE_PATH = "~/Users/marco/projects/DL/Experiments/"
+SAVE_PATH = os.path.expanduser('~/projects/ML-Experiments/MNIST/saved_models/')
 W1_FILE = SAVE_PATH + 'NN_W1.txt'
 W2_FILE = SAVE_PATH + 'NN_W2.txt'
 B1_FILE = SAVE_PATH + 'NN_b1.txt'
@@ -25,10 +24,11 @@ B2_FILE = SAVE_PATH + 'NN_b2.txt'
 NUM_CLASSES = 10    # we have the digits 0-9 => 10 classes
 LOAD_MODEL = True # if True, then we load weights and biases from file
 
-epochs = 0
+epochs = 0 if LOAD_MODEL else 100
+
 learning_rate = 0.01
+hidden_layer_size = 30
 num_features = 28 * 28
-hidden_layer_size = 50
 optimizer = tf.optimizers.Adam(learning_rate=learning_rate)
 metric_fn = tf.metrics.CategoricalAccuracy()
 loss_fn = tf.losses.CategoricalCrossentropy()
