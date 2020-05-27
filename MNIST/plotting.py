@@ -52,7 +52,8 @@ def display_sample_digits_validation(x_test_samples, y_test_samples, y_pred_samp
             
         plt.imshow(img, cmap=plt.get_cmap('gray_r'))
 
-    # leave ore space between the digit images
+    # leave more space between the digit images
     plt.tight_layout()
+    plt.subplots_adjust(hspace = .54)   # correct spacing found out with plt.subplot_tool()
 
     plt.show()

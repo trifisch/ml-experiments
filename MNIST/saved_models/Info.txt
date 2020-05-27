@@ -1,6 +1,10 @@
-Train Loss:  0.1084  - Train Metric:  0.971  - Test Loss:  0.1964  - Test Metric:  0.9434
+Epoch:  991  of  1000  - Train Loss:  0.0068  - Train Metric:  0.9998  - Test Loss:  0.0992  - Test Metric:  0.9703
 
-with
 epochs = 1000
+
 learning_rate = 0.01
-hidden_layer_size = 30
+hidden_layer_size = 80
+num_features = 28 * 28
+optimizer = tf.optimizers.Adam(learning_rate=learning_rate)
+metric_fn = tf.metrics.CategoricalAccuracy()
+loss_fn = tf.losses.CategoricalCrossentropy()

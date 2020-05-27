@@ -1,0 +1,6 @@
+Train Loss:  0.1084  - Train Metric:  0.971  - Test Loss:  0.1964  - Test Metric:  0.9434
+
+with
+epochs = 1000
+learning_rate = 0.01
+hidden_layer_size = 30

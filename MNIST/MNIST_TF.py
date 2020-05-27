@@ -24,10 +24,10 @@ B2_FILE = SAVE_PATH + 'NN_b2.txt'
 NUM_CLASSES = 10    # we have the digits 0-9 => 10 classes
 LOAD_MODEL = True # if True, then we load weights and biases from file
 
-epochs = 0 if LOAD_MODEL else 100
+epochs = 0 if LOAD_MODEL else 1000
 
 learning_rate = 0.01
-hidden_layer_size = 30
+hidden_layer_size = 80
 num_features = 28 * 28
 optimizer = tf.optimizers.Adam(learning_rate=learning_rate)
 metric_fn = tf.metrics.CategoricalAccuracy()
@@ -41,8 +41,8 @@ def initialize_weights_and_biases():
     global W1, W2, b1, b2
 
     # Initialize weights for first layer and output layer with random values (mean=0.0, stddev=1.0)
-    W1 = tf.Variable(tf.random.truncated_normal(shape=[num_features, hidden_layer_size], dtype=tf.float32), name="W1")
-    W2 = tf.Variable(tf.random.truncated_normal(shape=[hidden_layer_size, NUM_CLASSES], dtype=tf.float32), name="W2")
+    W1 = tf.Variable(tf.random.truncated_normal(shape=[num_features, hidden_layer_size], dtype=tf.float32, stddev=0.1), name="W1")
+    W2 = tf.Variable(tf.random.truncated_normal(shape=[hidden_layer_size, NUM_CLASSES], dtype=tf.float32, stddev=0.1), name="W2")
 
     # Biases (Vectors)
     b1 = tf.Variable(tf.constant(0.0, shape=[hidden_layer_size]), name="b1")
