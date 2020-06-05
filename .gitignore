@@ -139,3 +139,5 @@ cython_debug/
 
 # annoying Mac files
 .DS_Store
+
+.vscode/
