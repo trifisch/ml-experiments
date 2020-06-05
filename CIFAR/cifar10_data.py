@@ -130,7 +130,6 @@ if __name__ == "__main__":
     #cifar = CIFAR10()
     cifar = CIFAR10(scale_mode="minmax")
     
-    
     train_img = cifar.x_train[np.random.randint(0, cifar.x_train.shape[0])]
     val_img = cifar.x_train[np.random.randint(0, cifar.x_val.shape[0])]
     test_img = cifar.x_train[np.random.randint(0, cifar.x_test.shape[0])]
