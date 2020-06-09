@@ -34,8 +34,8 @@ for params in nn_params:
     # print model info
     #model.summary()
 
-    reduce_lr_callback = ReduceLROnPlateau(monitor='val_loss', factor=0.2, patience=5, min_lr=0.000001)
-    early_stopping_callback = EarlyStopping(monitor='loss', patience=3)
+    reduce_lr_callback = ReduceLROnPlateau(monitor='val_loss', factor=0.5, patience=5, min_lr=0.000001)
+    early_stopping_callback = EarlyStopping(monitor='val_loss', patience=10, restore_best_weights=True)
 
     history = model.fit(
         x=data.x_train, 

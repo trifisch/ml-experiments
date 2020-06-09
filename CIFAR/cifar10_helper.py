@@ -1,6 +1,5 @@
 import os
 import datetime
-import tensorflow.python.keras.backend as K
 from tensorflow.python.keras.callbacks import TensorBoard
 from tensorflow.python.keras.engine.input_layer import Input
 from tensorflow.python.keras.layers.convolutional import Conv2D
@@ -16,7 +15,7 @@ class LRTensorBoard(TensorBoard):
         super().__init__(log_dir=log_dir, **kwargs)
 
     def on_epoch_end(self, epoch, logs=None):
-        logs.update({'lr': K.eval(self.model.optimizer.lr)})
+        logs.update({'lr': self.model.optimizer.lr})
         super().on_epoch_end(epoch, logs)
 
 

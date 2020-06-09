@@ -8,6 +8,27 @@ from tensorflow.keras.optimizers import *
 #            Conv2D (C2D): filters, kernel_size, useBatchNormalization
 #            Activation (A): activation function
 nn_params = [
+    #*** Model (params[0] >Best v1 - orig<): accuracy=1.0000, val_accuracy=0.7639,
+    {
+        "name": "76,39%",
+        "epochs": 60,
+        "batch_size": 128,
+
+        "model": {
+            "optimizer": Adam,
+            "learning_rate": 0.0008,
+
+            "network": [
+                ["C2D", 70, 5, False],  ["A", "relu"], ["C2D", 70, 5, False],  ["A", "relu"], ["MaxPool2D"],
+                ["C2D", 128, 7, False],  ["A", "relu"], ["C2D", 128, 7, False],  ["A", "relu"], ["MaxPool2D"],
+                ["C2D", 164, 3, False],  ["A", "relu"], ["C2D", 164, 3, False],  ["A", "relu"], ["MaxPool2D"],
+                ["Flatten"], ["Dense", 140], ["A", "relu"]
+            ]
+        }
+    }
+]
+
+nn_params_v3 = [
     # ------ Based on parameter set 2 of v1 ------
     # with epochs = 20, augment_size=0, + reduce_lr_callback, early_stopping_callback
     # *** Model (params[0] >Best v1 - orig<): accuracy=1.0000, val_accuracy=0.7788,
