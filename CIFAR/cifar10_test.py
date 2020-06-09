@@ -12,7 +12,7 @@ from tensorflow.keras.models import load_model
 from cifar10_data import CIFAR10
 
 
-model_path = os.path.abspath("C:\\Users\\marco\\projects\\ml-experiments\\CIFAR\\_models\\model_20200609-135404")
+model_path = os.path.abspath("C:\\Users\\marco\\projects\\ml-experiments\\CIFAR\\_test\\model_20200609-135404")
 
 # reduce info messages and warnings from TF
 tf.get_logger().setLevel('ERROR')
