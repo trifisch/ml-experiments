@@ -147,3 +147,4 @@ _models/
 CIFAR/_logs/
 CIFAR/_models/
 Fashion-MNIST/logs/
+__local
