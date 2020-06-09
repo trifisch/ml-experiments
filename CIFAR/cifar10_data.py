@@ -127,7 +127,6 @@ class CIFAR10:
 if __name__ == "__main__":
     import matplotlib.pyplot as plt
 
-    #cifar = CIFAR10()
     cifar = CIFAR10(scale_mode="minmax")
     
     train_img = cifar.x_train[np.random.randint(0, cifar.x_train.shape[0])]
@@ -136,11 +135,11 @@ if __name__ == "__main__":
 
     fig, axes = plt.subplots(1, 3)
     plt.tight_layout()
-    scale = 1.0 # 255.0
-    axes[0].imshow(train_img/scale)   # only works with 255 if not already scaled upfront
+    scale = 1.0 # use 255.0 if not already scaled upfront, e.g. with minmax scaler
+    axes[0].imshow(train_img/scale)   
     axes[0].set_title("Train")
-    axes[1].imshow(val_img/scale)   # only works with 255 if not already scaled upfront
+    axes[1].imshow(val_img/scale)
     axes[1].set_title("Val")
-    axes[2].imshow(test_img/scale)   # only works with 255 if not already scaled upfront
+    axes[2].imshow(test_img/scale)
     axes[2].set_title("Test")
     plt.show()

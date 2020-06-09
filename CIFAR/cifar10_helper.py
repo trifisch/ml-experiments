@@ -1,5 +1,6 @@
 import os
 import datetime
+import tensorflow.python.keras.backend as K
 from tensorflow.python.keras.callbacks import TensorBoard
 from tensorflow.python.keras.engine.input_layer import Input
 from tensorflow.python.keras.layers.convolutional import Conv2D
@@ -9,6 +10,15 @@ from tensorflow.python.keras.models import Model
 from tensorflow.python.keras.layers.normalization import BatchNormalization
 from matplotlib import pyplot as plt
 
+# Also log the learning rate in TensorBoard
+class LRTensorBoard(TensorBoard):
+    def __init__(self, log_dir, **kwargs):
+        super().__init__(log_dir=log_dir, **kwargs)
+
+    def on_epoch_end(self, epoch, logs=None):
+        logs.update({'lr': K.eval(self.model.optimizer.lr)})
+        super().on_epoch_end(epoch, logs)
+
 
 def get_tensorboard_callback():
     log_dir = os.path.abspath("./CIFAR/_logs/")
@@ -16,7 +26,7 @@ def get_tensorboard_callback():
         os.mkdir(log_dir)
     log_dir = os.path.join(log_dir, datetime.datetime.now().strftime("%Y%m%d-%H%M%S"))
 
-    tb = TensorBoard(
+    tb = LRTensorBoard(
         log_dir=log_dir,
         histogram_freq=1,
         write_graph=True)

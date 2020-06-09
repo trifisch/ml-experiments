@@ -4,6 +4,7 @@ import tensorflow as tf
 from cifar10_data import CIFAR10
 from cifar10_params import nn_params
 from cifar10_helper import get_tensorboard_callback, get_model_save_path, get_model, plot_history
+from tensorflow.python.keras.callbacks import EarlyStopping, ReduceLROnPlateau
 
 
 # reduce info messages and warnings from TF
@@ -16,7 +17,7 @@ tf.autograph.set_verbosity(0)
 data = CIFAR10(scale_mode="minmax", augment_size=0)
 
 # Iterate through parameter settings
-best_val_accuracy=1e20
+best_val_accuracy=0.0
 count = 0
 max_count = len(nn_params)
 
@@ -30,16 +31,19 @@ for params in nn_params:
     # print model info
     #model.summary()
 
+    reduce_lr_callback = ReduceLROnPlateau(monitor='val_loss', factor=0.2, patience=5, min_lr=0.000001)
+    early_stopping_callback = EarlyStopping(monitor='loss', patience=3)
+
     history = model.fit(
         x=data.x_train, 
         y=data.y_train, 
         epochs=params["epochs"],
         batch_size=params["batch_size"],
         validation_data=(data.x_val, data.y_val),
-        callbacks=[get_tensorboard_callback()],
+        callbacks=[get_tensorboard_callback(), reduce_lr_callback, early_stopping_callback],
         use_multiprocessing=False)
 
-    if history.history["val_accuracy"][-1] < best_val_accuracy:
+    if history.history["val_accuracy"][-1] > best_val_accuracy:
         # new best model found => print message and save model
         print(f"****** New best model (params[{count-1}] >{params['name']}<): accuracy={history.history['accuracy'][-1]:.4f}, val_accuracy={history.history['val_accuracy'][-1]:.4f}, ")
         model.save(get_model_save_path())
