@@ -11,17 +11,17 @@ nn_params = [
     #*** Model (params[0] >Best v1 - orig<): accuracy=1.0000, val_accuracy=0.7639,
     {
         "name": "76,39%",
-        "epochs": 2,
-        "batch_size": 1024, #128,
+        "epochs": 60,
+        "batch_size": 128,
 
         "model": {
             "optimizer": Adam,
-            "learning_rate": 0.01, #0.0008,
+            "learning_rate": 0.0008,
 
             "network": [
                 ["C2D", 70, 5, False],  ["A", "relu"], ["C2D", 70, 5, False],  ["A", "relu"], ["MaxPool2D"],
-  #              ["C2D", 128, 7, False],  ["A", "relu"], ["C2D", 128, 7, False],  ["A", "relu"], ["MaxPool2D"],
-  #              ["C2D", 164, 3, False],  ["A", "relu"], ["C2D", 164, 3, False],  ["A", "relu"], ["MaxPool2D"],
+                ["C2D", 128, 7, False],  ["A", "relu"], ["C2D", 128, 7, False],  ["A", "relu"], ["MaxPool2D"],
+                ["C2D", 164, 3, False],  ["A", "relu"], ["C2D", 164, 3, False],  ["A", "relu"], ["MaxPool2D"],
                 ["Flatten"], ["Dense", 140], ["A", "relu"]
             ]
         }
